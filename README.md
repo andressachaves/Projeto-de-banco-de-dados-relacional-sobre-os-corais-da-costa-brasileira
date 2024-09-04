@@ -1,69 +1,99 @@
-# Projeto-de-banco-de-dados-relacional-sobre-os-corais-da-costa-brasileira
 # Sistema de Monitoramento de Saúde dos Corais (SMSC)
 
-## Descrição do Projeto
+## Descrição
 
-Este projeto foi liderado por **Andressa Chaves** e tem como objetivo a criação de um banco de dados relacional que permita a consulta e análise de dados sobre os impactos ambientais nos recifes de corais brasileiros. O sistema, denominado **Sistema de Monitoramento de Saúde dos Corais (SMSC)**, foi desenvolvido para a ONG CoralData, que se dedica à pesquisa, monitoramento e conscientização sobre os corais localizados na costa brasileira.
+Este projeto consiste na criação de um banco de dados relacional para a ONG **CoralData**, com o objetivo de facilitar a análise e o monitoramento da saúde dos recifes de coral da costa brasileira, focando nas 24 espécies endêmicas que existem somente no Brasil. O sistema permite a consulta de dados sobre recifes de corais, suas localizações, espécies, gêneros e as ameaças que enfrentam. A iniciativa visa apoiar pesquisadores, conservacionistas e o público em geral no desenvolvimento de projetos de pesquisa e na promoção do conhecimento sobre esses ecossistemas vitais.
 
-O banco de dados SMSC foi projetado para facilitar o acesso a informações críticas sobre a saúde dos recifes de corais, com foco nas 24 espécies endêmicas que só existem no Brasil. A plataforma permitirá que usuários consultem e utilizem esses dados sem nenhum custo, incentivando o desenvolvimento de projetos de pesquisa e promovendo o conhecimento sobre esses importantes ecossistemas.
+## Como Instalar e Rodar o Projeto
 
-## Estrutura do Banco de Dados
+### Pré-requisitos
 
-### Projeto Conceitual
+- **MySQL** instalado em sua máquina.
+- Um cliente MySQL como o **MySQL Workbench** ou acesso via linha de comando.
+- Clonar este repositório ou baixar os arquivos SQL fornecidos.
 
-O modelo de dados do SMSC foi concebido a partir do minimundo das entidades relacionadas aos recifes de corais, identificando as seguintes entidades:
+### Passos para Instalação
 
-- **Recifes de Corais**: Identificados por uma sigla, com atributos como nome, tipo, localização, área e profundidade. 
-- **Espécies**: Classificadas em três grupos principais: corais verdadeiros, hidrocorais e corais moles, com atributos como nome científico, nome comum e grupo.
-- **Corais**: Componentes estruturais dos recifes, identificados por uma sigla, com atributos como nome popular, nome científico e tipo de formação.
-- **Ameaças**: Fatores que podem prejudicar ou destruir os recifes de corais, classificados por origem (atividade humana ou causas naturais) e com atributos como nome e descrição.
-- **Saúde dos Corais**: Indicador do estado geral do recife, influenciado pelas ameaças, e classificado em níveis de comprometimento.
+1. **Clone o repositório** ou baixe os arquivos SQL para sua máquina local.
+   ```bash
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   ```
 
-### Relacionamentos
+2. **Abra o cliente MySQL** e conecte-se ao seu servidor local.
 
-- **Recifes de corais** contêm uma ou mais espécies.
-- **Coral** pertence a uma espécie.
-- **Ameaças** afetam recifes de corais.
-- **Saúde dos corais** é influenciada por ameaças.
+3. **Crie o banco de dados** executando o script `create_database.sql`:
+   ```sql
+   SOURCE /caminho/para/o/arquivo/create_database.sql;
+   ```
 
-### Requisitos Funcionais
+4. **Popule o banco de dados** com os dados iniciais executando o script `populate_database.sql`:
+   ```sql
+   SOURCE /caminho/para/o/arquivo/populate_database.sql;
+   ```
 
-O sistema deve:
+5. **Verifique as tabelas** para garantir que os dados foram inseridos corretamente:
+   ```sql
+   SHOW TABLES;
+   ```
 
-1. Armazenar informações sobre a localização dos recifes de corais.
-2. Armazenar informações sobre a saúde dos recifes de corais.
-3. Armazenar informações sobre as ameaças que os recifes de corais estão enfrentando.
+## Como Usar
 
-### Consultas
+Após a instalação e configuração do banco de dados, você pode executar consultas para obter informações relevantes. Algumas das funcionalidades incluem:
 
-O SMSC permitirá realizar consultas como:
+- **Listar estados com recifes de corais**.
+- **Contar o número total de recifes registrados**.
+- **Identificar recifes com níveis de branqueamento alto ou baixo**.
+- **Obter o número de recifes em um estado específico**.
+- **Determinar as ameaças mais presentes nos recifes**.
+- **Selecionar recifes com impacto humano alto ou médio**.
+- **Contar o total de recifes presentes no Brasil**.
 
-1. Consultar todos os recifes de corais da costa brasileira.
-2. Consultar todos os corais endêmicos da costa brasileira.
-3. Consultar todos os corais endêmicos localizados no recife de Fernando de Noronha.
-4. Consultar corais endêmicos em estado de comprometimento.
-5. Consultar a espécie de coral mais ameaçada na costa brasileira.
-6. Consultar recifes de corais em áreas de alto risco de poluição.
-7. Consultar a espécie de coral em declínio mais rápido.
-8. Consultar recifes de corais em áreas de alto risco de desenvolvimento costeiro.
-9. Consultar recifes de corais em áreas de alto risco de aumento do nível do mar.
-10. Consultar recifes de corais em áreas de alto risco de acidificação dos oceanos.
+### Executando Consultas de Exemplo
 
-## Ferramentas Utilizadas
+Use o arquivo `queries.sql` para executar consultas pré-definidas:
 
-- **SQL Server**
-- **MySQL Workbench**
-- **Azure Data Studio**
+```sql
+SOURCE /caminho/para/o/arquivo/queries.sql;
+```
+
+Ou execute consultas diretamente no cliente MySQL. Exemplo:
+
+```sql
+-- Liste os estados que possuem recifes de corais
+SELECT 
+    rc.nome_recife,
+    l.estado
+FROM recifes_de_corais rc
+JOIN localizacao l ON rc.cidade = l.cidade;
+```
 
 ## Como Contribuir
 
-Contribuições para o aprimoramento do Sistema de Monitoramento de Saúde dos Corais são bem-vindas. Para contribuir, abra uma issue ou envie um pull request com suas sugestões.
+Se você deseja contribuir para o projeto, siga os passos abaixo:
+
+1. **Faça um fork** do projeto.
+
+2. **Crie uma nova branch** para suas modificações:
+   ```bash
+   git checkout -b minha-nova-funcionalidade
+   ```
+
+3. **Commit** suas alterações:
+   ```bash
+   git commit -m "Adiciona nova funcionalidade"
+   ```
+
+4. **Envie para o repositório remoto**:
+   ```bash
+   git push origin minha-nova-funcionalidade
+   ```
+
+5. **Abra um Pull Request** explicando suas alterações.
 
 ## Licença
 
-Este projeto está licenciado sob a [BSB License](LICENSE).
+Este projeto está licenciado sob a licença [MIT License](LICENSE). Sinta-se à vontade para usar, modificar e distribuir conforme as condições da licença.
 
 ---
 
-Projeto liderado por **Andressa Chaves**.
-
+**Observação:** Este projeto é uma iniciativa para apoiar a conservação dos recifes de corais brasileiros. Agradecemos seu interesse e contribuição!
