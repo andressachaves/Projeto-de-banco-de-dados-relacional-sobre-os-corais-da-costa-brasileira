@@ -1,4 +1,4 @@
--- gitattributes
+gitattributes
 *.txt linguist-detectable=false
 *.csv linguist-detectable=false
 *.pdf linguist-detectable=false
