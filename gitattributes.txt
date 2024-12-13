@@ -1,7 +1,4 @@
 gitattributes
-*.txt linguist-detectable=false
-*.csv linguist-detectable=false
-*.pdf linguist-detectable=false
-*.jpg linguist-detectable=false
-*.py linguist-language=Python
 *.sql linguist-language=SQL
+*.txt linguist-detectable=false
+
